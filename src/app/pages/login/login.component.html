@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center"><b>VENDAS</b></h5>
+          <!-- <h5 class="card-title text-center"><b>Instituto de Educação do Amazonas</b></h5> -->
+          <br>
+          <div class="form-signin" *ngIf="loading" style="text-align: center;">
+            <img  src="assets/loader.gif"/>
+          </div>
+
+          <div class="form-signin" *ngIf="!loading">
+            <label for="inputUsername"><b>Usuário</b></label>
+            <div class="form-label-group">
+              <input type="text" #userfocus id="usuario" [(ngModel)]="usuario" class="form-control" placeholder="Usuário" (keydown.enter)="pswfocus.focus();" required>
+            </div>
+            <br>
+            <label for="inputPassword"><b>Senha</b></label>
+            <div class="form-label-group">
+              <input type="password" #pswfocus id="senha" [(ngModel)]="senha" class="form-control" placeholder="Senha" (keydown.enter)="entrar();" required>
+            </div>
+
+            <p *ngIf="msgerro!=''" style="color:red"><b>{{msgerro}}</b></p>
+            <hr class="my-4">
+            <button class="btn btn-lg btn-block text-uppercase" style="background-color: #1976d287;color: white;" type="submit" (click)="entrar();">Entrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

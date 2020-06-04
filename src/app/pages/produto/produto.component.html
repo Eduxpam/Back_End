@@ -1,0 +1,77 @@
+<div class="container-fluid" style="width: 90%;">
+
+  <div *ngIf="loading" style="text-align: center;">
+    <img  src="assets/loader.gif"/>
+  </div>
+  <!--  -->
+  <!-- <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <b>Cadastrar Produto</b>
+        </mat-panel-title>
+        <mat-panel-description>
+          Clique para abrir o formulário
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="card card-body" style="padding-bottom: 0.75rem !important; margin-bottom: 20px;">
+        <app-form *ngIf="!loading" (formEvent)="create($event)"></app-form>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion> -->
+  <!--  -->
+
+  <div class="card card-body" style="padding-bottom: 0.75rem !important; margin-bottom: 20px;">
+    <app-form *ngIf="!loading" (formEvent)="create($event)"></app-form>
+  </div>
+
+
+  <!-- FILTRO -->
+  <div class="card card-body" style="padding-bottom: 0.75rem !important; margin-bottom: 20px;">
+    <div class="row">
+      <label class="col-sm-1" style="align-self: center; text-align: left;"><strong>Filtrar: </strong></label>
+      <select class="custom-select form-control col-sm-2" [(ngModel)]="tipoFiltro" (change)="limpaFiltro()">
+        <option value="0" selected>Nome</option>
+        <option value="1">Código</option>
+      </select>
+
+      &nbsp;&nbsp;
+      <input class="form-control col-sm-4" type="text" [(ngModel)]="valorFiltro" (input)="getAll()" oninput="this.value = this.value.toUpperCase()">
+      &nbsp;
+      <span style="align-self: center; font-weight: bold;"><input type="checkbox" [(ngModel)]="chkAtivos" checked [disabled]="!chkInativos" (change)="getAll()">Ativos</span>
+      &nbsp;
+      <span style="align-self: center; font-weight: bold;"><input type="checkbox" [(ngModel)]="chkInativos" [checked]="false" [disabled]="!chkAtivos" (change)="getAll()">Inativos</span>
+
+    </div>
+  </div>
+  <!-- -------------------------------------------------------------------- -->
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">CÓDIGO</th>
+        <th scope="col">DESCRIÇÃO</th>
+        <th scope="col">PREÇO</th>
+        <th scope="col">QUANT.</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of database">
+        <td>{{item.codigo}}</td>
+        <td>{{item.descri}}</td>
+        <td>{{item.preco | currency:'BRL':'symbol':'0.2-2':'pt'}}</td>
+        <td>{{item.quant}}</td>
+        <td><button class="btn btn-warning" (click)="update(item)">Editar</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="loadingData" style="text-align: center;">
+    <img  src="assets/loader.gif"/>
+  </div>
+  <div *ngIf="database.length == 0 && !loadingData" style="text-align: center;">
+    <h4>Nenhum registro encontrado</h4>
+  </div>
+</div>

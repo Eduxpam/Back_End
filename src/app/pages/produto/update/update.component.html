@@ -1,0 +1,47 @@
+<div mat-dialog-content>
+  <form [formGroup]="form" style="margin-top: 5px; width: 95%; text-align: center;">
+    <div class="row margbot">
+      <label class="col-sm-3">Código: </label>
+      <input class="col-sm-5 form-control" type="text" formControlName="codigo" autocomplete="off" (blur)="validaCod()">
+    </div>
+    <div class="row margbot">
+      <label class="col-sm-3">Descrição: </label>
+      <input class="col-sm-9 form-control" type="text" formControlName="descri" oninput="this.value = this.value.toUpperCase()">
+    </div>
+    <div class="row margbot">
+      <label class="col-sm-3">Quantidade: </label>
+      <input class="col-sm-3 form-control" type="number" formControlName="quant" placeholder="0">
+    </div>
+    <div class="row margbot">
+      <label class="col-sm-3">Preço: </label>
+      <input class="col-sm-3 form-control" type="text" formControlName="preco" currencyMask>
+    </div>
+    <div class="row margbot">
+      <label class="col-sm-3">Ativo: </label>
+      <select class="col-sm-3 custom-select form-control" formControlName="ativo">
+        <option value="S" selected>SIM</option>
+        <option value="N">NÃO</option>
+      </select>
+    </div>
+
+  </form>
+</div>
+<br>
+<div mat-dialog-actions>
+
+  <div class="col-sm-3">
+    <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+  </div>
+
+  <div class="col-sm-3">
+    <button class="btn btn-info" (click)="salvar()" [disabled]="!form.valid || formOk()">Salvar</button>
+  </div>
+
+  <div class="offset-3 col-sm-3">
+    <button  class="btn btn-danger" (click)="excluir()">Excluir</button>
+  </div>
+
+
+
+</div>
+<br>
